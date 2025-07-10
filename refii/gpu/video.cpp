@@ -762,18 +762,18 @@ static std::unique_ptr<uint8_t[]> g_buttonBcDiff;
 
 static void LoadEmbeddedResources()
 {
-    if (g_vulkan)
-    {
-        g_shaderCache = std::make_unique<uint8_t[]>(g_spirvCacheDecompressedSize);
-        ZSTD_decompress(g_shaderCache.get(), g_spirvCacheDecompressedSize, g_compressedSpirvCache, g_spirvCacheCompressedSize);
-    }
-#ifdef UNLEASHED_RECOMP_D3D12
-    else
-    {
-        g_shaderCache = std::make_unique<uint8_t[]>(g_dxilCacheDecompressedSize);
-        ZSTD_decompress(g_shaderCache.get(), g_dxilCacheDecompressedSize, g_compressedDxilCache, g_dxilCacheCompressedSize);
-    }
-#endif
+//    if (g_vulkan)
+//    {
+//        g_shaderCache = std::make_unique<uint8_t[]>(g_spirvCacheDecompressedSize);
+//        ZSTD_decompress(g_shaderCache.get(), g_spirvCacheDecompressedSize, g_compressedSpirvCache, g_spirvCacheCompressedSize);
+//    }
+//#ifdef UNLEASHED_RECOMP_D3D12
+//    else
+//    {
+//        g_shaderCache = std::make_unique<uint8_t[]>(g_dxilCacheDecompressedSize);
+//        ZSTD_decompress(g_shaderCache.get(), g_dxilCacheDecompressedSize, g_compressedDxilCache, g_dxilCacheCompressedSize);
+//    }
+//#endif
 
     g_buttonBcDiff = decompressZstd(g_button_bc_diff, g_button_bc_diff_uncompressed_size);
 }
@@ -1350,7 +1350,7 @@ static void CreateImGuiBackend()
     ImFontAtlasSnapshot::GenerateGlyphRanges();
 #endif
 
-    InitImGuiUtils();
+    //InitImGuiUtils();
     //AchievementMenu::Init();
     //AchievementOverlay::Init();
     //ButtonGuide::Init();
@@ -2340,39 +2340,39 @@ static void DrawProfiler()
 
 static void DrawFPS()
 {
-    if (!Config::ShowFPS)
-        return;
+    //if (!Config::ShowFPS)
+    //    return;
 
-    double time = ImGui::GetTime();
-    static double updateTime = time;
-    static double fps = 0;
-    static double totalDeltaTime = 0.0;
-    static uint32_t totalDeltaCount = 0;
+    //double time = ImGui::GetTime();
+    //static double updateTime = time;
+    //static double fps = 0;
+    //static double totalDeltaTime = 0.0;
+    //static uint32_t totalDeltaCount = 0;
 
-    totalDeltaTime += g_presentProfiler.value.load();
-    totalDeltaCount++;
+    //totalDeltaTime += g_presentProfiler.value.load();
+    //totalDeltaCount++;
 
-    if (time - updateTime >= 1.0f)
-    {
-        fps = 1000.0 / std::max(totalDeltaTime / double(totalDeltaCount), 1.0);
-        updateTime = time;
-        totalDeltaTime = 0.0;
-        totalDeltaCount = 0;
-    }
+    //if (time - updateTime >= 1.0f)
+    //{
+    //    fps = 1000.0 / std::max(totalDeltaTime / double(totalDeltaCount), 1.0);
+    //    updateTime = time;
+    //    totalDeltaTime = 0.0;
+    //    totalDeltaCount = 0;
+    //}
 
-    auto drawList = ImGui::GetBackgroundDrawList();
+    //auto drawList = ImGui::GetBackgroundDrawList();
 
-    auto fmt = fmt::format("FPS: {:.2f}", fps);
-    auto font = ImFontAtlasSnapshot::GetFont("FOT-SeuratPro-M.otf");
-    auto fontSize = Scale(10);
-    auto textSize = font->CalcTextSizeA(fontSize, FLT_MAX, 0, fmt.c_str());
+    //auto fmt = fmt::format("FPS: {:.2f}", fps);
+    //auto font = ImFontAtlasSnapshot::GetFont("FOT-SeuratPro-M.otf");
+    //auto fontSize = Scale(10);
+    //auto textSize = font->CalcTextSizeA(fontSize, FLT_MAX, 0, fmt.c_str());
 
-    ImVec2 min = { Scale(40), Scale(30) };
-    ImVec2 max = { min.x + std::max(Scale(75), textSize.x + Scale(10)), min.y + Scale(15) };
-    ImVec2 textPos = { min.x + Scale(2), CENTRE_TEXT_VERT(min, max, textSize) + Scale(0.2f) };
+    //ImVec2 min = { Scale(40), Scale(30) };
+    //ImVec2 max = { min.x + std::max(Scale(75), textSize.x + Scale(10)), min.y + Scale(15) };
+    //ImVec2 textPos = { min.x + Scale(2), CENTRE_TEXT_VERT(min, max, textSize) + Scale(0.2f) };
 
-    drawList->AddRectFilled(min, max, IM_COL32(0, 0, 0, 200));
-    drawList->AddText(font, fontSize, textPos, IM_COL32_WHITE, fmt.c_str());
+    //drawList->AddRectFilled(min, max, IM_COL32(0, 0, 0, 200));
+    //drawList->AddText(font, fontSize, textPos, IM_COL32_WHITE, fmt.c_str());
 }
 
 static void DrawImGui()
@@ -4612,13 +4612,14 @@ static void ProcSetVertexDeclaration(const RenderCommand& cmd)
 
 static ShaderCacheEntry* FindShaderCacheEntry(XXH64_hash_t hash)
 {
-    auto end = g_shaderCacheEntries + g_shaderCacheEntryCount;
-    auto findResult = std::lower_bound(g_shaderCacheEntries, end, hash, [](ShaderCacheEntry& lhs, XXH64_hash_t rhs)
-        {
-            return lhs.hash < rhs;
-        });
+    return nullptr;
+    //auto end = g_shaderCacheEntries + g_shaderCacheEntryCount;
+    //auto findResult = std::lower_bound(g_shaderCacheEntries, end, hash, [](ShaderCacheEntry& lhs, XXH64_hash_t rhs)
+    //    {
+    //        return lhs.hash < rhs;
+    //    });
 
-    return findResult != end && findResult->hash == hash ? findResult : nullptr;
+    //return findResult != end && findResult->hash == hash ? findResult : nullptr;
 }
 
 static GuestShader* CreateShader(const be<uint32_t>* function, ResourceType resourceType)

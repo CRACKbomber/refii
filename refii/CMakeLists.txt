@@ -79,11 +79,11 @@ set(REFII_CPU_CXX_SOURCES
 )
 
 set(REFII_GPU_CXX_SOURCES
-#    "gpu/video.cpp"
+    "gpu/video.cpp"
     "gpu/imgui/imgui_common.cpp"
     "gpu/imgui/imgui_font_builder.cpp"
     "gpu/imgui/imgui_snapshot.cpp"
-#    "gpu/rhi/plume_vulkan.cpp"
+    "gpu/rhi/plume_vulkan.cpp"
 )
 
 if (UNLEASHED_RECOMP_D3D12)
@@ -110,7 +110,7 @@ set(REFII_UI_CXX_SOURCES
 #    "ui/button_guide.cpp"
 #    "ui/fader.cpp"
     "ui/game_window.cpp"
-#    "ui/imgui_utils.cpp"
+    "ui/imgui_utils.cpp"
 #    "ui/installer_wizard.cpp"
 #    "ui/message_window.cpp"
 #    "ui/options_menu.cpp"

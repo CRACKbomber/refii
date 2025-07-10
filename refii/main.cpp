@@ -182,11 +182,11 @@ int main(int argc, char *argv[])
     bool runInstallerWizard = forceInstaller || forceDLCInstaller || !isGameInstalled;
     //if (runInstallerWizard)
     //{
-    //    if (!Video::CreateHostDevice(sdlVideoDriver, graphicsApiRetry))
-    //    {
-    //        SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, GameWindow::GetTitle(), Localise("Video_BackendError").c_str(), GameWindow::s_pWindow);
-    //        std::_Exit(1);
-    //    }
+        //if (!Video::CreateHostDevice(sdlVideoDriver, graphicsApiRetry))
+        //{
+        //    SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, GameWindow::GetTitle(), Localise("Video_BackendError").c_str(), GameWindow::s_pWindow);
+        //    std::_Exit(1);
+        //}
 
     //    if (!InstallerWizard::Run(GAME_INSTALL_DIRECTORY, isGameInstalled && forceDLCInstaller))
     //    {
@@ -231,14 +231,14 @@ int main(int argc, char *argv[])
 
     //if (!runInstallerWizard)
     //{
-        //if (!Video::CreateHostDevice(sdlVideoDriver, graphicsApiRetry))
-        //{
-        //    SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, GameWindow::GetTitle(), Localise("Video_BackendError").c_str(), GameWindow::s_pWindow);
-        //    std::_Exit(1);
-        //}
+        if (!Video::CreateHostDevice(sdlVideoDriver, graphicsApiRetry))
+        {
+            SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, GameWindow::GetTitle(), Localise("Video_BackendError").c_str(), GameWindow::s_pWindow);
+            std::_Exit(1);
+        }
     //}
 
-   // Video::StartPipelinePrecompilation();
+    //Video::StartPipelinePrecompilation();
     DoBootlegPatches();
     GuestThread::Start({ entry, 0, 0 });
 
