@@ -1,6 +1,7 @@
 #include <stdafx.h>
 #include <kernel/kernel.h>
 #include <kernel/function.h>
+#include <gpu/video.h>
 
 // Misc Kernel funcs
 GUEST_FUNCTION_HOOK(sub_82CC2E48, refii::kernel::SleepEx);
@@ -105,3 +106,128 @@ void FixR11CaseIssue(PPCRegister& r11)
         r11.u64 = 0;
     }
 }
+
+// D3D Rendering Hooks
+
+// D3DXFillTexture
+//GUEST_FUNCTION_HOOK(sub_, refii::gpu::D3DXFillTexture);
+
+// D3DXFillVolumeTexture
+//GUEST_FUNCTION_HOOK(sub_, refii::gpu::D3DXFillVolumeTexture);
+
+// D3DDevice_SetRenderTarget
+GUEST_FUNCTION_HOOK(sub_822869A0, refii::gpu::SetRenderTarget);
+
+// D3DDevice_DestroyResource
+// GUEST_FUNCTION_HOOK(sub_, refii::gpu::DestructResource);
+
+// D3DDevice_SetStreamSource
+GUEST_FUNCTION_HOOK(sub_821B6C60, refii::gpu::SetStreamSource);
+
+// D3DDevice_SetViewport
+GUEST_FUNCTION_HOOK(sub_821F9F58, refii::gpu::SetViewport);
+ 
+// D3DDevice_Clear
+GUEST_FUNCTION_HOOK(sub_821E2FE0, refii::gpu::Clear);
+ 
+// D3DDevice_Present
+// GUEST_FUNCTION_HOOK(sub_, Video::Present);
+ 
+// D3DDevice_SetResolution
+// GUEST_FUNCTION_HOOK(sub_, refii::gpu::SetResolution);
+ 
+// D3DDevice_CreateSurface
+// GUEST_FUNCTION_HOOK(sub_, refii::gpu::CreateSurface);
+ 
+// D3DSurface_GetDesc
+GUEST_FUNCTION_HOOK(sub_821FA070, refii::gpu::GetSurfaceDesc);
+
+// D3DDevice_SetDepthStencilSurface
+GUEST_FUNCTION_HOOK(sub_82264590, refii::gpu::SetDepthStencilSurface);
+
+// D3DDevice_CreateTexture
+GUEST_FUNCTION_HOOK(sub_82B98B28, refii::gpu::CreateTexture);
+
+// D3DDevice_SetTexture
+GUEST_FUNCTION_HOOK(sub_821B6EE0, refii::gpu::SetTexture);
+
+// LockTextureRect
+// GUEST_FUNCTION_HOOK(sub_, refii::gpu::LockTextureRect);
+
+// UnlockTextureRect
+// GUEST_FUNCTION_HOOK(sub_, refii::gpu::UnlockTextureRect);
+
+// D3DDevice_SetScissorRect
+GUEST_FUNCTION_HOOK(sub_821F9C08, refii::gpu::SetScissorRect);
+
+// D3DDevice_Resolve
+// GUEST_FUNCTION_HOOK(sub_, refii::gpu::StretchRect);
+
+// D3DDevice_SetIndices
+GUEST_FUNCTION_HOOK(sub_8219CC30, refii::gpu::SetIndices);
+
+// D3DDevice_CreatePixelShader
+GUEST_FUNCTION_HOOK(sub_82B992B0, refii::gpu::CreatePixelShader);
+
+// D3DDevice_SetPixelShader
+GUEST_FUNCTION_HOOK(sub_82208BB0, refii::gpu::SetPixelShader);
+
+// D3DDevice_CreateIndexBuffer
+// GUEST_FUNCTION_HOOK(sub_, refii::gpu::CreateIndexBuffer);
+
+// D3DIndexBuffer_Lock
+GUEST_FUNCTION_HOOK(sub_82196980, refii::gpu::LockIndexBuffer);
+
+// D3DIndexBuffer_Unlock
+// GUEST_FUNCTION_HOOK(sub_, refii::gpu::UnlockIndexBuffer);
+
+// D3DIndexBuffer_GetDesc
+// GUEST_FUNCTION_HOOK(sub_, refii::gpu::GetIndexBufferDesc);
+
+// D3DDevice_CreateVertexShader
+GUEST_FUNCTION_HOOK(sub_82B994BC, refii::gpu::CreateVertexShader);
+
+// D3DDevice_SetVertexShader
+GUEST_FUNCTION_HOOK(sub_82232510, refii::gpu::SetVertexShader);
+
+// D3DDevice_CreateVertexDeclaration
+GUEST_FUNCTION_HOOK(sub_82B99720, refii::gpu::CreateVertexDeclaration);
+
+// D3DDevice_GetVertexDeclaration
+// GUEST_FUNCTION_HOOK(sub_, reblue::gpu::GetVertexDeclaration);
+
+// D3DDevice_SetVertexDeclaration
+//GUEST_FUNCTION_HOOK(sub_, refii::gpu::SetVertexDeclaration);
+
+// D3DDevice_HashVertexDeclaration
+// GUEST_FUNCTION_HOOK(sub_, reblue::gpu::HashVertexDeclaration);
+
+// D3DDevice_CreateVertexBuffer
+// GUEST_FUNCTION_HOOK(sub_, refii::gpu::CreateVertexBuffer);
+
+// D3DVertexBuffer_Lock
+GUEST_FUNCTION_HOOK(sub_8225F980, refii::gpu::LockVertexBuffer);
+
+// D3DVertexBuffer_Unlock
+// GUEST_FUNCTION_HOOK(sub_, refii::gpu::UnlockVertexBuffer);
+
+// D3DVertexBuffer_GetDesc
+// GUEST_FUNCTION_HOOK(sub_, reblue::gpu::GetVertexBufferDesc);
+
+// D3DDevice_DrawIndexedVertices
+GUEST_FUNCTION_HOOK(sub_8221DFC0, refii::gpu::DrawIndexedPrimitive);
+
+// D3DDevice_DrawVertices
+GUEST_FUNCTION_HOOK(sub_8221C3E8, refii::gpu::DrawPrimitive);
+
+// D3DDevice_DrawVerticesUP
+GUEST_FUNCTION_HOOK(sub_82265CD8, refii::gpu::DrawPrimitiveUP);
+
+GUEST_FUNCTION_ALIAS_STUB(sub_82BA2270, "D3DDevice_AcquireThreadOwnership");
+//GUEST_FUNCTION_ALIAS_STUB(sub_, "D3DDevice_ReleaseThreadOwnership");
+GUEST_FUNCTION_ALIAS_STUB(sub_82B98248, "D3DDevice_SetGammaRamp");
+GUEST_FUNCTION_ALIAS_STUB(sub_8219CD68, "D3DDevice_SetShaderGPRAllocation");
+GUEST_FUNCTION_ALIAS_STUB(sub_83024AD8, "D3DXCompileShaderEx");
+GUEST_FUNCTION_ALIAS_STUB(sub_822655F0, "D3DDevice_SetPrediction");
+GUEST_FUNCTION_ALIAS_STUB(sub_82D168C8, "D3DXFilterTexture");
+GUEST_FUNCTION_ALIAS_STUB(sub_82BA2218, "D3DDevice_Release");
