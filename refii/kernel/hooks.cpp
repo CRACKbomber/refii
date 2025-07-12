@@ -119,7 +119,7 @@ void FixR11CaseIssue(PPCRegister& r11)
 GUEST_FUNCTION_HOOK(sub_822869A0, refii::gpu::SetRenderTarget);
 
 // D3DDevice_DestroyResource
-// GUEST_FUNCTION_HOOK(sub_, refii::gpu::DestructResource);
+GUEST_FUNCTION_HOOK(sub_821F65C0, refii::gpu::DestructResource);
 
 // D3DDevice_SetStreamSource
 GUEST_FUNCTION_HOOK(sub_821B6C60, refii::gpu::SetStreamSource);
@@ -137,7 +137,7 @@ GUEST_FUNCTION_HOOK(sub_821E2FE0, refii::gpu::Clear);
 // GUEST_FUNCTION_HOOK(sub_, refii::gpu::SetResolution);
  
 // D3DDevice_CreateSurface
-// GUEST_FUNCTION_HOOK(sub_, refii::gpu::CreateSurface);
+GUEST_FUNCTION_HOOK(sub_821F4EC0, refii::gpu::CreateSurface);
  
 // D3DSurface_GetDesc
 GUEST_FUNCTION_HOOK(sub_821FA070, refii::gpu::GetSurfaceDesc);
@@ -152,7 +152,7 @@ GUEST_FUNCTION_HOOK(sub_82B98B28, refii::gpu::CreateTexture);
 GUEST_FUNCTION_HOOK(sub_821B6EE0, refii::gpu::SetTexture);
 
 // LockTextureRect
-// GUEST_FUNCTION_HOOK(sub_, refii::gpu::LockTextureRect);
+GUEST_FUNCTION_HOOK(sub_, refii::gpu::LockTextureRect);
 
 // UnlockTextureRect
 // GUEST_FUNCTION_HOOK(sub_, refii::gpu::UnlockTextureRect);
@@ -179,7 +179,7 @@ GUEST_FUNCTION_HOOK(sub_82208BB0, refii::gpu::SetPixelShader);
 GUEST_FUNCTION_HOOK(sub_82196980, refii::gpu::LockIndexBuffer);
 
 // D3DIndexBuffer_Unlock
-// GUEST_FUNCTION_HOOK(sub_, refii::gpu::UnlockIndexBuffer);
+GUEST_FUNCTION_HOOK(sub_82B9EED0, refii::gpu::UnlockIndexBuffer);
 
 // D3DIndexBuffer_GetDesc
 // GUEST_FUNCTION_HOOK(sub_, refii::gpu::GetIndexBufferDesc);
@@ -197,7 +197,7 @@ GUEST_FUNCTION_HOOK(sub_82B99720, refii::gpu::CreateVertexDeclaration);
 // GUEST_FUNCTION_HOOK(sub_, reblue::gpu::GetVertexDeclaration);
 
 // D3DDevice_SetVertexDeclaration
-//GUEST_FUNCTION_HOOK(sub_, refii::gpu::SetVertexDeclaration);
+GUEST_FUNCTION_HOOK(sub_822224A8, refii::gpu::SetVertexDeclaration);
 
 // D3DDevice_HashVertexDeclaration
 // GUEST_FUNCTION_HOOK(sub_, reblue::gpu::HashVertexDeclaration);
@@ -209,7 +209,7 @@ GUEST_FUNCTION_HOOK(sub_82B99720, refii::gpu::CreateVertexDeclaration);
 GUEST_FUNCTION_HOOK(sub_8225F980, refii::gpu::LockVertexBuffer);
 
 // D3DVertexBuffer_Unlock
-// GUEST_FUNCTION_HOOK(sub_, refii::gpu::UnlockVertexBuffer);
+GUEST_FUNCTION_HOOK(sub_82B9EEC0, refii::gpu::UnlockVertexBuffer);
 
 // D3DVertexBuffer_GetDesc
 // GUEST_FUNCTION_HOOK(sub_, reblue::gpu::GetVertexBufferDesc);
@@ -224,7 +224,7 @@ GUEST_FUNCTION_HOOK(sub_8221C3E8, refii::gpu::DrawPrimitive);
 GUEST_FUNCTION_HOOK(sub_82265CD8, refii::gpu::DrawPrimitiveUP);
 
 GUEST_FUNCTION_ALIAS_STUB(sub_82BA2270, "D3DDevice_AcquireThreadOwnership");
-//GUEST_FUNCTION_ALIAS_STUB(sub_, "D3DDevice_ReleaseThreadOwnership");
+GUEST_FUNCTION_ALIAS_STUB(sub_82BA22B0, "D3DDevice_ReleaseThreadOwnership");
 GUEST_FUNCTION_ALIAS_STUB(sub_82B98248, "D3DDevice_SetGammaRamp");
 GUEST_FUNCTION_ALIAS_STUB(sub_8219CD68, "D3DDevice_SetShaderGPRAllocation");
 GUEST_FUNCTION_ALIAS_STUB(sub_83024AD8, "D3DXCompileShaderEx");
