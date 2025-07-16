@@ -109,6 +109,8 @@ void FixR11CaseIssue(PPCRegister& r11)
 
 // D3D Rendering Hooks
 
+GUEST_FUNCTION_HOOK(sub_82BA6990, refii::gpu::InitializeHardwareDevice);
+
 // D3DXFillTexture
 //GUEST_FUNCTION_HOOK(sub_, refii::gpu::D3DXFillTexture);
 

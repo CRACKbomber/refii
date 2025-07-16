@@ -523,7 +523,7 @@ extern void VideoConfigValueChangedCallback(class IConfigDef* config);
 
 namespace refii {
     namespace gpu {
-        extern uint32_t CreateDevice(uint32_t a1, uint32_t a2, uint32_t a3, uint32_t a4, uint32_t a5, be<uint32_t>* a6);
+        extern uint32_t InitializeHardwareDevice(be<uint32_t>* pDevice, be<uint32_t>* ppPresentationParams);
 
         extern void DestructResource(GuestResource* resource);
 
